@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Create a separate edited RimWorld 1.5 save from the repository save."""
+# This file is run by the repository workflow after each relevant push.
 import copy
 import re
 import xml.etree.ElementTree as ET
