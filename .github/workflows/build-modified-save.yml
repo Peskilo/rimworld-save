@@ -1,0 +1,33 @@
+name: Build modified RimWorld save
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-modified-save.yml"
+      - "tools/modify_rimworld_save.py"
+      - "выживчики.rws"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out save and editor
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Edit save
+        run: python tools/modify_rimworld_save.py
+      - name: Upload edited save
+        uses: actions/upload-artifact@v4
+        with:
+          name: rimworld-save-edited
+          path: выживчики_Дом_Александр_Тирэйн.rws
+          if-no-files-found: error
+          retention-days: 7
