@@ -114,7 +114,10 @@ doctor.find("pos").text = "(162, 0, 28)"
 doctor.find("faction").text = "Faction_14"
 doctor.find("kindDef").text = "Colonist"
 doctor.find("spawnedTick").text = TICK
-doctor.find("gender").text = "Male"
+gender_node = doctor.find("gender")
+if gender_node is None:
+    gender_node = ET.SubElement(doctor, "gender")
+gender_node.text = "Male"
 
 name = doctor.find("name")
 if name is None:
